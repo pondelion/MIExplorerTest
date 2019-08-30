@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
-from typing import Dict
+from typing import Dict, List
 import requests
-from ...utils.config_reader import Config
+from ...utils.config_reader import MPConfig
 from ...utils.logger import Logger
 
 
@@ -9,14 +9,14 @@ class BaseApiHelper(ABCMeta):
 
     def __init__(self):
         self._API_URL_FMT = self._get_api_url_fmt()
-        self._API_KEY = Config.API_KEY
-        self._API_URL_FMT += f'?{self._API_KEY}'
+        self._API_KEY = MPConfig.API_KEY
+        self._API_URL_FMT += f'?API_KEY={self._API_KEY}'
 
     @abstractmethod
     def _get_api_url_fmt(self):
         raise NotImplementedError
 
-    def api_call(
+    def fetch(
         self,
         kwargs: Dict[str, str]
     ) -> Dict:
@@ -34,3 +34,7 @@ class BaseApiHelper(ABCMeta):
             raise e
 
         return res
+
+    @abstractmethod
+    def get_required_keywards(self) -> List[str]:
+        pass
