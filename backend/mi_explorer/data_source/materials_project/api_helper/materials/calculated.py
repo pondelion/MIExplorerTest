@@ -67,7 +67,4 @@ class VaspCalculated(BaseApiHelper):
         self,
         description: bool=False
     ) -> List[str] | Dict[str, str]:
-        if description:
-            return self._AVAILABLE_PROPERTY_LIST
-        else:
-            return list(self._AVAILABLE_PROPERTY_LIST.keys())
+        return self._AVAILABLE_PROPERTY_LIST if description else list(self._AVAILABLE_PROPERTY_LIST.keys())
