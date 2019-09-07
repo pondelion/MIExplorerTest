@@ -11,8 +11,7 @@ type Vec3 = {
 
 export type ThreeObject = {
   tag?: string,
-  obj: THREE.Mesh,
-  material: THREE.MeshBasicMaterial,
+  obj: THREE.Mesh | THREE.ArrowHelper | THREE.Sprite,
   objType: 'box' | 'sphere' | 'line' | 'sprite' | 'other',
 }
 

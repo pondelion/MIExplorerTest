@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from sklearn.datasets import load_digits
 # from umap import UMAP
 from sklearn.manifold import TSNE
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/mock_3d_dist_data', methods=['GET'])

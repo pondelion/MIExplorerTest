@@ -32,14 +32,13 @@ class TestBoxScene extends ThreeScene {
     box.position.y = 0;
     box.position.z = 0;
 
-    const tbs: ThreeObjects = [];
-    tbs.push({
+    const objs: ThreeObjects = [];
+    objs.push({
       tag: 'box1',
       obj: box,
-      material: material,
       objType: 'box'
     }) 
-    return tbs;
+    return objs;
   }
 }
 
