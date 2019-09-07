@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 
-class ObjectFactory {
+export class ObjectFactory {
 
   static createSphere(
     pos_x: number = 0.0,
@@ -113,9 +113,13 @@ class ObjectFactory {
   ): THREE.Sprite {
     var material = new THREE.SpriteMaterial({color: color});
     var sprite = new THREE.Sprite(material);
+    sprite.position.x = pos_x;
+    sprite.position.y = pos_y;
+    sprite.position.z = pos_z;
     sprite.scale.x = scale;
     sprite.scale.y = scale;
     sprite.scale.z = scale;
+
     return sprite;
   }
 }

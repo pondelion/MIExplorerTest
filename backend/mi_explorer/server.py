@@ -14,7 +14,9 @@ def mock_3d_dist_data():
     digits = load_digits()
     data = digits.data
     label = digits.target
+    import numpy as np
     reduced = TSNE(n_components=3).fit_transform(data)
+    reduced /= np.percentile(reduced, 90)
 
     return jsonify({'tag': 'digit',
                     'data': reduced.tolist(),

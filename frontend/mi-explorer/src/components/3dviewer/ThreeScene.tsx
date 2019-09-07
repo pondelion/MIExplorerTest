@@ -12,7 +12,7 @@ type Vec3 = {
 export type ThreeObject = {
   tag?: string,
   obj: THREE.Mesh | THREE.ArrowHelper | THREE.Sprite,
-  objType: 'box' | 'sphere' | 'line' | 'sprite' | 'other',
+  objType: 'box' | 'sphere' | 'plane' | 'sprite' | 'arrow' | 'other',
 }
 
 export type ThreeObjects = ThreeObject[];
@@ -101,6 +101,11 @@ class ThreeScene extends React.Component<Props> {
 
   createObjects(): ThreeObjects {
     return [];
+  }
+
+  onObjectsUpdated(): void {
+    //this._scene.remove.apply(this._scene, this._scene.children);
+    this._objects.map(obj => this._scene.add(obj.obj));
   }
 
   onButtonClick(): void {
