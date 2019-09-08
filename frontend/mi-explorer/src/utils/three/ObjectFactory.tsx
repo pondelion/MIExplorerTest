@@ -27,9 +27,9 @@ export class ObjectFactory {
     pos_x: number = 0,
     pos_y: number = 0,
     pos_z: number = 0,
-    size_x: number = 5,
-    size_y: number = 5,
-    size_z: number = 5,
+    size_x: number = 1.0,
+    size_y: number = 1.0,
+    size_z: number = 1.0,
     opacity: number = 1.0,
     color: number = 0xff0000,
   ): THREE.Mesh {
@@ -77,12 +77,12 @@ export class ObjectFactory {
 
   static createArrow(
     name: string,
-    dir_x: number = 0,
-    dir_y: number = 1,
-    dir_z: number = 0,
     pos_x: number = 0,
     pos_y: number = 0,
     pos_z: number = 0,
+    dir_x: number = 0,
+    dir_y: number = 1,
+    dir_z: number = 0,
     rotation_x: number = -Math.PI,
     rotation_y: number = 0,
     rotation_z: number = 0,
@@ -111,8 +111,8 @@ export class ObjectFactory {
     scale: number = 0.2,
     color: number = 0x0000ee,
   ): THREE.Sprite {
-    var material = new THREE.SpriteMaterial({color: color});
-    var sprite = new THREE.Sprite(material);
+    const material = new THREE.SpriteMaterial({color: color});
+    const sprite = new THREE.Sprite(material);
     sprite.position.x = pos_x;
     sprite.position.y = pos_y;
     sprite.position.z = pos_z;

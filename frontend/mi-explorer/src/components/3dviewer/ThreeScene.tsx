@@ -104,8 +104,9 @@ class ThreeScene extends React.Component<Props> {
   }
 
   onObjectsUpdated(): void {
-    //this._scene.remove.apply(this._scene, this._scene.children);
+    this._scene.remove.apply(this._scene, this._scene.children);
     this._objects.map(obj => this._scene.add(obj.obj));
+    console.log(this._scene);
   }
 
   onButtonClick(): void {

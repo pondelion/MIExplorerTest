@@ -8,7 +8,7 @@ import { ObjectFactory as OF } from '../../utils/three/ObjectFactory';
 
 type Props = ThreeProps;
 
-class TestBoxScene extends ThreeScene {
+class TestSphereScene extends ThreeScene {
 
   constructor(props: Props) {
     super(props);
@@ -31,12 +31,12 @@ class TestBoxScene extends ThreeScene {
   createObjects(): ThreeObjects {
     const objs: ThreeObjects = [];
     objs.push({
-      tag: 'box1',
-      obj: OF.createBox(0.0, 0.0, 0.0),
-      objType: 'box'
+      tag: 'sphere1',
+      obj: OF.createSphere(0.0, 0.0, 0.0),
+      objType: 'sphere'
     }) 
     return objs;
   }
 }
 
-export default TestBoxScene;
+export default TestSphereScene;

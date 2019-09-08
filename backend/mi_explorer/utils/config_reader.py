@@ -1,8 +1,16 @@
 import yaml
+import os
 from .logger import Logger
 
 
-def _load_mp_config(filepath: str='config/material_project.yml'):
+DEFAULT_FILEPATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 
+    '..',
+    'config/materials_project.yml'
+)
+
+
+def _load_mp_config(filepath: str=DEFAULT_FILEPATH):
     return yaml.load(open(filepath))
 
 

@@ -1,11 +1,12 @@
 from abc import ABCMeta, abstractmethod
 from typing import Dict, List
 import requests
-from ...utils.config_reader import MPConfig
-from ...utils.logger import Logger
+import os
+from ....utils.config_reader import MPConfig
+from ....utils.logger import Logger
 
 
-class BaseApiHelper(ABCMeta):
+class BaseApiHelper(metaclass=ABCMeta):
 
     def __init__(self):
         self._API_URL_FMT = self._get_api_url_fmt()
@@ -26,11 +27,20 @@ class BaseApiHelper(ABCMeta):
             Logger.e(__class__, 'Failed to construct API url string.')
             raise e
 
+        # Logger.d(api_url)
+
         try:
             res = requests.get(api_url)
-            res = res['response']
         except Exception as e:
             Logger.e(__class__, f'Failed to call api : f{api_url}')
+            raise e
+
+        try:
+            res = res.json()['response']
+        except Exception as e:
+            err_msg = 'Failed to parse response.\n'
+            err_msg += res if isinstance(res, dict) else res.json()
+            Logger.e(__class__, err_msg)
             raise e
 
         return res

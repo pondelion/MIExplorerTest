@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Union
 from ..base_api_helper import BaseApiHelper
 
 
@@ -38,7 +38,7 @@ class VaspCalculated(BaseApiHelper):
                                          ' to per atom in the unit cell',
             'e_above_hull': 'Calculated energy above convex hull for structure. Please see'
                             ' Phase Diagram Manual for the interpretation of this quantity.',
-            'elasticity': 'Mechanical properties in the elastic limit. Contains the full elastic
+            'elasticity': 'Mechanical properties in the elastic limit. Contains the full elastic'
                           ' tensor as well as derived properties, e.g. Poisson ratio and bulk (K)'
                           ' and shear (G) moduli. Consult our hierarchical documentation for the'
                           ' particular names of sub-keys.',
@@ -66,5 +66,5 @@ class VaspCalculated(BaseApiHelper):
     def get_available_property_list(
         self,
         description: bool=False
-    ) -> List[str] | Dict[str, str]:
+    ) -> Union[List[str], Dict[str, str]]:
         return self._AVAILABLE_PROPERTY_LIST if description else list(self._AVAILABLE_PROPERTY_LIST.keys())
