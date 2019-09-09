@@ -12,7 +12,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       {/* <Menu styles={styles} /> */}
-      <CoordinateAxisScene width={2000} height={1000} cameraPos={{x: 5, y: 5, z: 5}} />
+      <CrystalStructure width={2000} height={1000} cameraPos={{x: 5, y: 5, z: 5}} />
     </div>
   );
 }

@@ -4,11 +4,12 @@ import * as THREE from 'three';
 import ThreeScene from './ThreeScene';
 import { Props as ThreeProps, ThreeObjects } from './ThreeScene';
 import { ObjectFactory as OF } from '../../utils/three/ObjectFactory';
+import CoordinateAxisScene from './CoordinateAxisScene';
 
 
 type Props = ThreeProps;
 
-class CrystalStructure extends ThreeScene {
+class CrystalStructure extends CoordinateAxisScene {
 
   private _crystalStructure: number[][] | null = null;
 
@@ -37,7 +38,7 @@ class CrystalStructure extends ThreeScene {
   }
 
   createObjects(): ThreeObjects {
-    const objs: ThreeObjects = []
+    const objs: ThreeObjects = super.createObjects();
 
     if (this._crystalStructure === null) {
       return objs;
@@ -53,7 +54,7 @@ class CrystalStructure extends ThreeScene {
               (this._crystalStructure[0][1]*i + this._crystalStructure[1][1]*j + this._crystalStructure[2][1]*k)/3,
               (this._crystalStructure[0][2]*i + this._crystalStructure[1][2]*j + this._crystalStructure[2][2]*k)/3,
               1.0,
-              0.6,
+              0.2,
             ),
             objType: 'sphere'
           });

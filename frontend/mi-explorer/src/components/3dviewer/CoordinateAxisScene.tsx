@@ -6,31 +6,35 @@ import { Props as ThreeProps } from './ThreeScene';
 import { ObjectFactory as OF } from '../../utils/three/ObjectFactory';
 
 
-type Props = ThreeProps;
+// interface Props extends ThreeProps {
+//   axis_length: number;
+// }
+interface Props extends ThreeProps {};
+
 
 class CoordinateAxisScene extends ThreeScene {
 
+  // protected _axis_length: number = 1.0;
+
   constructor(props: Props) {
-    super(props);
+    super(props as ThreeProps);
+
+    // if (props.axis_length !== null) {
+    //   this._axis_length = props.axis_length;
+    // }
 
     this.animate = this.animate.bind(this);
     this.createObjects = this.createObjects.bind(this);
-
-    this._objects = this.createObjects();
-    this.onObjectsUpdated();
 
     this.forceUpdate();
   }
 
   animate(): void {
-    this._camera.position.x = 3.0 * Math.cos(0.01 * this._cnt);
-    this._camera.position.z = 3.0 * Math.sin(0.01 * this._cnt);
-    this._camera.lookAt(new THREE.Vector3(0, 0, 0));
     super.animate();
   }
 
   createObjects(): ThreeObjects {
-    const objs: ThreeObjects = [];
+    const objs: ThreeObjects = super.createObjects();
 
     objs.push({
       tag: 'x_axis',
@@ -39,9 +43,10 @@ class CoordinateAxisScene extends ThreeScene {
         0, 0, 0,
         1.0, 0.0, 0.0,
         0.5*Math.PI, 0.0, 0,
-        3.0,
+        6.0, //this._axis_length,
         0xFF0000,
-        0.6, 0.6,
+        0.5, //this._axis_length/5,
+        0.5, //this._axis_length/5,
       ),
       objType: 'arrow'
     })

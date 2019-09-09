@@ -17,7 +17,7 @@ export type ThreeObject = {
 
 export type ThreeObjects = ThreeObject[];
 
-export type Props = {
+export interface Props {
   width: number,
   height: number,
   cameraPos: Vec3,

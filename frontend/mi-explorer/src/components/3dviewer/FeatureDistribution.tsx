@@ -4,11 +4,12 @@ import * as THREE from 'three';
 import ThreeScene from './ThreeScene';
 import { Props as ThreeProps, ThreeObjects } from './ThreeScene';
 import { ObjectFactory as OF } from '../../utils/three/ObjectFactory';
+import CoordinateAxisScene from './CoordinateAxisScene';
 
 
 type Props= ThreeProps;
 
-class FeatureDistribution extends ThreeScene {
+class FeatureDistribution extends CoordinateAxisScene {
 
   private _data = [];
   private _label = [];
@@ -39,6 +40,8 @@ class FeatureDistribution extends ThreeScene {
   }
 
   createObjects(): ThreeObjects {
+    const objs: ThreeObjects = super.createObjects();
+
     const COLORS: number[] = [
       0xB71C1C, 0x880E4F, 0x4A148C, 0x311B92, 0x1A237E, 0x0D47A1,
       0x006064, 0x1B5E20, 0x827717, 0xFF6F00, 0xBF360C, 0xEEEEEE,
@@ -48,14 +51,15 @@ class FeatureDistribution extends ThreeScene {
         return COLORS[label]
     });
 
-    return this._data.map((data: number[], idx: number) => {
-      //console.log(data);
-      return {
+    this._data.map((data: number[], idx: number) => {
+      objs.push({
         tag: 'points1',
         obj: OF.createSprite(data[0], data[1], data[2], 0.05, cols[idx]),
         objType: 'sprite'
-      }
+      });
     })
+
+    return objs;
   }
 
   animate(): void {
