@@ -11,7 +11,6 @@ type Props = ThreeProps;
 class CrystalStructure extends ThreeScene {
 
   private _crystalStructure: number[][] | null = null;
-  private _cnt: number = 0;
 
   constructor(props: Props) {
     super(props);
@@ -31,7 +30,6 @@ class CrystalStructure extends ThreeScene {
         console.log(this._crystalStructure);
 
         this._objects = this.createObjects();
-        console.log(this._objects[100].obj.position);
         this.onObjectsUpdated();
 
         this.forceUpdate();
@@ -50,11 +48,12 @@ class CrystalStructure extends ThreeScene {
         for (let k = -3; k <= 3; k++) {
           objs.push({
             tag: `atom_${i}_${j}_${k}`,
-            obj: OF.createArrow(
-              'atom',
+            obj: OF.createSphere(
               (this._crystalStructure[0][0]*i + this._crystalStructure[1][0]*j + this._crystalStructure[2][0]*k)/3,
               (this._crystalStructure[0][1]*i + this._crystalStructure[1][1]*j + this._crystalStructure[2][1]*k)/3,
               (this._crystalStructure[0][2]*i + this._crystalStructure[1][2]*j + this._crystalStructure[2][2]*k)/3,
+              1.0,
+              0.6,
             ),
             objType: 'sphere'
           });
@@ -66,7 +65,6 @@ class CrystalStructure extends ThreeScene {
   }
 
   animate(): void {
-    this._cnt += 1;
     this._camera.position.x = 20.0 * Math.cos(0.01 * this._cnt);
     this._camera.position.z = 20.0 * Math.sin(0.01 * this._cnt);
     this._camera.lookAt(new THREE.Vector3(0, 0, 0));

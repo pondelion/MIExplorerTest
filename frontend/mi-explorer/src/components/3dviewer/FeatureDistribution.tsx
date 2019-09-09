@@ -12,7 +12,6 @@ class FeatureDistribution extends ThreeScene {
 
   private _data = [];
   private _label = [];
-  private _cnt: number = 0;
 
   constructor(props: Props) {
     super(props);

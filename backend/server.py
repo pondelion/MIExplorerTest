@@ -4,6 +4,7 @@ from sklearn.datasets import load_digits
 # from umap import UMAP
 from sklearn.manifold import TSNE
 from mi_explorer.data_source.materials_project.api_helper import VaspCalculated
+from mi_explorer.utils.logger import Logger
 
 
 app = Flask(__name__)
@@ -28,7 +29,7 @@ def mock_3d_dist_data():
 def test_crystal_structure(material_key):
     vc = VaspCalculated()
     res = vc.fetch({'material_specifier': material_key, 'property': 'structure'})
-    print(len(res))
+    Logger.d('test_crystal_structure', len(res))
     mat = res[0]['structure']['lattice']['matrix']
 
     return jsonify({'crystal_structure': mat})

@@ -8,11 +8,18 @@ export class ObjectFactory {
     pos_y: number = 0.0,
     pos_z: number = 0.0,
     radius: number = 1.0,
+    opacity: number = 1.0,
     color: number = 0x22DD22,
   ): THREE.Mesh {
     const sphereRadius = radius;
     const sphereGeometry = new THREE.SphereGeometry(sphereRadius, 20, 20);
-    const sphereMaterial = new THREE.MeshLambertMaterial({color: color});
+    const sphereMaterial = new THREE.MeshLambertMaterial({
+      color: color,
+      opacity: opacity,
+      transparent: true,
+      side: THREE.DoubleSide,
+      depthWrite: false
+    })
     const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
     sphere.position.x = pos_x;

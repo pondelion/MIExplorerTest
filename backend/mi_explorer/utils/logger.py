@@ -1,3 +1,8 @@
+import logging
+
+
+formatter = '%(levelname)s : %(asctime)s : %(message)s'
+logging.basicConfig(format=formatter)
 
 
 class Logger:
@@ -5,14 +10,20 @@ class Logger:
     @staticmethod
     def d(tag: str, message: str):
         """debug log"""
-        raise NotImplementedError
+        logger = logging.getLogger('mi_explorer')
+        logger.setLevel(logging.DEBUG)
+        logger.debug('[%s] %s', tag, message)
 
     @staticmethod
     def i(tag: str, message: str):
         """infomation log"""
-        raise NotImplementedError
+        logger = logging.getLogger('mi_explorer')
+        logger.setLevel(logging.INFO)
+        logger.info('[%s] %s', tag, message)
 
     @staticmethod
     def e(tag: str, message: str):
         """error log"""
-        raise NotImplementedError
+        logger = logging.getLogger('mi_explorer')
+        logger.setLevel(logging.ERROR)
+        logger.error('[%s] %s', tag, message)

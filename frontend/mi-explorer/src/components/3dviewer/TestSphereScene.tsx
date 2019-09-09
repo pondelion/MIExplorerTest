@@ -23,8 +23,9 @@ class TestSphereScene extends ThreeScene {
   }
 
   animate(): void {
-    this._objects[0].obj.rotation.x += 0.01;
-    this._objects[0].obj.rotation.y += 0.01;
+    this._camera.position.x = 3.0 * Math.cos(0.01 * this._cnt);
+    this._camera.position.z = 3.0 * Math.sin(0.01 * this._cnt);
+    this._camera.lookAt(new THREE.Vector3(0, 0, 0));
     super.animate();
   }
 

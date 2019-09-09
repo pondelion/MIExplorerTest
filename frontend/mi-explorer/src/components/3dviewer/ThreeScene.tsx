@@ -33,6 +33,7 @@ class ThreeScene extends React.Component<Props> {
   protected _mount: HTMLDivElement | null = null;
   protected _frameId: number | null = null;
   protected _objects: ThreeObjects = [];
+  protected _cnt: number = 0;
 
   state = {
     camera_pos_x: 0
@@ -95,6 +96,7 @@ class ThreeScene extends React.Component<Props> {
   }
 
   animate(): void {
+    this._cnt += 1;
     this._renderer.render(this._scene, this._camera);
     this._frameId = window.requestAnimationFrame(this.animate);
   }
@@ -106,7 +108,14 @@ class ThreeScene extends React.Component<Props> {
   onObjectsUpdated(): void {
     this._scene.remove.apply(this._scene, this._scene.children);
     this._objects.map(obj => this._scene.add(obj.obj));
-    console.log(this._scene);
+
+    const ambientLight = new THREE.AmbientLight(0x222222);
+    this._scene.add(ambientLight);
+
+    const spotLight = new THREE.SpotLight(0xffffff);
+    spotLight.position.set(10, 10, 10);
+    spotLight.castShadow = true;
+    this._scene.add(spotLight);
   }
 
   onButtonClick(): void {
