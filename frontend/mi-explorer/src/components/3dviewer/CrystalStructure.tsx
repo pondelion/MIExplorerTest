@@ -65,8 +65,8 @@ class CrystalStructure extends ThreeScene {
   }
 
   animate(): void {
-    this._camera.position.x = 20.0 * Math.cos(0.01 * this._cnt);
-    this._camera.position.z = 20.0 * Math.sin(0.01 * this._cnt);
+    this._camera.position.x = 20.0 * Math.cos(0.05 * this._cnt);
+    this._camera.position.z = 20.0 * Math.sin(0.05 * this._cnt);
     this._camera.lookAt(new THREE.Vector3(0, 0, 0));
     super.animate();
   }
