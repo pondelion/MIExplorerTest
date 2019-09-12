@@ -2,7 +2,7 @@ import React from 'react';
 
 type Props= {}
 
-export class Chart extends React.Component<Props> {
+export class Scatter extends React.Component<Props> {
 
   render() {
     return (
@@ -12,4 +12,4 @@ export class Chart extends React.Component<Props> {
   }
 }
 
-export default Chart;
+export default Scatter;

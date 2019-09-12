@@ -30,9 +30,15 @@ def test_crystal_structure(material_key):
     vc = VaspCalculated()
     res = vc.fetch({'material_specifier': material_key, 'property': 'structure'})
     Logger.d('test_crystal_structure', len(res))
-    mat = res[0]['structure']['lattice']['matrix']
+    mat = res[2]['structure']['lattice']['matrix']
+    sites = {}
+    for site in res[2]['structure']['sites']:
+        if site['species'][0]['element'] not in sites:
+            sites[site['species'][0]['element']] = []
+        sites[site['species'][0]['element']].append(site['xyz'])
 
-    return jsonify({'crystal_structure': mat})
+    return jsonify({'matrix': mat,
+                    'sites': sites})
 
 
 if __name__ == '__main__':
