@@ -11,13 +11,14 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route('/mock_3d_dist_data', methods=['GET'])
-def mock_3d_dist_data():
+@app.route('/mock_dist_data/<dim>', methods=['GET'])
+def mock_3d_dist_data(dim):
+    dim = int(dim)
     digits = load_digits()
     data = digits.data
     label = digits.target
     import numpy as np
-    reduced = TSNE(n_components=3).fit_transform(data)
+    reduced = TSNE(n_components=dim).fit_transform(data)
     reduced /= np.percentile(reduced, 90)
 
     return jsonify({'tag': 'digit',

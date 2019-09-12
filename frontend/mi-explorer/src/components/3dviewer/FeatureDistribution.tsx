@@ -21,7 +21,7 @@ class FeatureDistribution extends CoordinateAxisScene {
     this.createObjects = this.createObjects.bind(this);
 
     request
-      .get('http://127.0.0.1:5000/mock_3d_dist_data')
+      .get('http://127.0.0.1:5000/mock_dist_data/3')
       .end((err, res) => {
         if (err) {
           console.log(err);
