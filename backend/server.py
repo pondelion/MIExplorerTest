@@ -12,7 +12,7 @@ CORS(app)
 
 
 @app.route('/mock_dist_data/<dim>', methods=['GET'])
-def mock_3d_dist_data(dim):
+def mock_dist_data(dim):
     dim = int(dim)
     digits = load_digits()
     data = digits.data
@@ -40,6 +40,33 @@ def test_crystal_structure(material_key):
 
     return jsonify({'matrix': mat,
                     'sites': sites})
+
+
+@app.route('/vasp/material_list', methods=['GET'])
+def material_list():
+    MAX_ID = 400
+    MAX_TORELANCE = 5
+    fail_cnt = 0
+    formula_list = []
+    material_id_list = []
+    for i in range(MAX_ID):
+        vc = VaspCalculated()
+        res = vc.fetch({'material_specifier': f'mp-{i}', 'property': 'pretty_formula'})
+        try:
+            formula = res[0]['pretty_formula']
+            material_id = res[0]['material_id']
+            formula_list.append(formula)
+            material_id_list.append(material_id)
+            fail_cnt = 0
+        except Exception as e:
+            fail_cnt += 1
+            Logger.e('material_list', f'mp-{i}')
+            Logger.e('material_list', e)
+        if fail_cnt >= MAX_TORELANCE:
+            break
+
+    return jsonify({'formula': formula_list,
+                    'material_id': material_id_list})
 
 
 if __name__ == '__main__':
