@@ -21,8 +21,8 @@ class MaterialIdCrawler(BaseCrawler):
         except Exception:
             itr = range(MAX_ID)
 
+        vc = VaspCalculated()
         for i in itr:
-            vc = VaspCalculated()
             res = vc.fetch({'material_specifier': f'mp-{i}', 'property': 'pretty_formula'})
             try:
                 formula = res[0]['pretty_formula']
