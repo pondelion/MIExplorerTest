@@ -4,12 +4,12 @@ from .logger import Logger
 
 
 DEFAULT_MP_FILEPATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), 
+    os.path.dirname(os.path.abspath(__file__)),
     '..',
     'config/materials_project.yml'
 )
 DEFAULT_AWS_FILEPATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), 
+    os.path.dirname(os.path.abspath(__file__)),
     '..',
     'config/aws.yml'
 )
@@ -49,5 +49,5 @@ class MPConfig(metaclass=_MPConfig):
     pass
 
 
-class WASConfig(metaclass=_AWSConfig):
+class AWSConfig(metaclass=_AWSConfig):
     pass

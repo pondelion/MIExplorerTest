@@ -24,15 +24,15 @@ class BaseCrawler(metaclass=ABCMeta):
 
     def crawl(
         self,
-        async: bool=False,
+        async_: bool=False,
         on_finish_callback: Callable[[Dict], None]=None,
         on_fail_callback: Callable[[str], None]=None,
     ):
-        if async:
+        if async_:
             threading.Thread(
                 target=self._crawl_worker,
                 args=([on_finish_callback, on_fail_callback])
-            )
+            ).start()
         else:
             self._data = self._crawl()
 

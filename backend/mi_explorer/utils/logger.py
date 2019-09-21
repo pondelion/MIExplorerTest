@@ -27,3 +27,10 @@ class Logger:
         logger = logging.getLogger('mi_explorer')
         logger.setLevel(logging.ERROR)
         logger.error('[%s] %s', tag, message)
+
+    @staticmethod
+    def w(tag: str, message: str):
+        """warning log"""
+        logger = logging.getLogger('mi_explorer')
+        logger.setLevel(logging.WARNING)
+        logger.warn('[%s] %s', tag, message)

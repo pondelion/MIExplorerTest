@@ -1,2 +1,5 @@
 materials_project.yml
+aws.yml
 __pycache__
+tests/*
+experiments/*
