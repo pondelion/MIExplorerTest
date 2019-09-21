@@ -11,7 +11,7 @@ class MaterialListCrawler(BaseCrawler):
         self._MAX_ID = max_id
 
     def _crawl(self):
-        MAX_TORELANCE = 5
+        MAX_TORELANCE = 50
         fail_cnt = 0
         formula_list = []
         material_id_list = []

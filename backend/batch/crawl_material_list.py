@@ -7,7 +7,7 @@ from mi_explorer.utils.logger import Logger
 
 
 def main():
-    mlc = MaterialListCrawler(max_id=20)
+    mlc = MaterialListCrawler(max_id=40000)
     global finished
     finished = False
 
