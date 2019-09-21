@@ -15,9 +15,6 @@ def main():
         try:
             Logger.d('material_crawl', data)
             s3_helper = S3Helper()
-            print(s3_helper.to_s3path(
-                    f'material_list/{time.strftime("%Y%m%d_%H%M%S")}.csv'
-                ))
             s3_helper.save(
                 df=data,
                 s3_path=s3_helper.to_s3path(
