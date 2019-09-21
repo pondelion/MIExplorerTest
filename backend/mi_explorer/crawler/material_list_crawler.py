@@ -1,15 +1,16 @@
 import pandas as pd
 from .base_crawler import BaseCrawler
 from ..data_source.materials_project.api_helper import VaspCalculated
+from ..utils.logger import Logger
 
 
-class MaterialIdCrawler(BaseCrawler):
+class MaterialListCrawler(BaseCrawler):
 
-    def __init__(self):
-        super.__init__()
+    def __init__(self, max_id=40000):
+        super(MaterialListCrawler, self).__init__()
+        self._MAX_ID = max_id
 
     def _crawl(self):
-        MAX_ID = 40000
         MAX_TORELANCE = 5
         fail_cnt = 0
         formula_list = []
@@ -17,9 +18,10 @@ class MaterialIdCrawler(BaseCrawler):
 
         try:
             from fastprogress import progress_bar as pb
-            itr = pb(range(MAX_ID))
+            itr = pb(range(self._MAX_ID))
         except Exception:
-            itr = range(MAX_ID)
+            Logger.w(__class__, 'fastprogress is not installed.')
+            itr = range(self._MAX_ID)
 
         vc = VaspCalculated()
         for i in itr:
@@ -37,9 +39,9 @@ class MaterialIdCrawler(BaseCrawler):
             if fail_cnt >= MAX_TORELANCE:
                 break
 
-        this._data = pd.DataFrame({
+        self._data = pd.DataFrame({
             'material_id': material_id_list,
             'formula': formula_list
         })
 
-        return this._data
+        return self._data

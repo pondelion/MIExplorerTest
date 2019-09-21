@@ -16,11 +16,11 @@ DEFAULT_AWS_FILEPATH = os.path.join(
 
 
 def _load_mp_config(filepath: str=DEFAULT_MP_FILEPATH):
-    return yaml.load(open(filepath))
+    return yaml.safe_load(open(filepath))
 
 
 def _load_aws_config(filepath: str=DEFAULT_AWS_FILEPATH):
-    return yaml.load(open(filepath))
+    return yaml.safe_load(open(filepath))
 
 
 class _MPConfig(type):
