@@ -8,8 +8,8 @@ setup(
     author='pondelion',
     url='https://github.com/pondelion/MIExplorerTest',
 
-    packages=find_packages(where='backend/mi_explorer'),
-    package_dir={'': 'backend/mi_explorer'},
+    packages=find_packages(where='mi_explorer'),
+    package_dir={'': 'mi_explorer'},
 
     install_requires=[],
     extras_require={},
