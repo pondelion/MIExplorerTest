@@ -29,10 +29,12 @@ class BaseCrawler(metaclass=ABCMeta):
         on_fail_callback: Callable[[str], None]=None,
     ):
         if async_:
-            threading.Thread(
+            thread = threading.Thread(
                 target=self._crawl_worker,
                 args=([on_finish_callback, on_fail_callback])
-            ).start()
+            )
+            thread.start()
+            return thread
         else:
             self._data = self._crawl()
 
