@@ -1,6 +1,6 @@
 
 
-class ResponseParser:
+class VaspResponseParser:
 
     @classmethod
     def parse_structure(cls, res):
@@ -14,6 +14,7 @@ class ResponseParser:
                     sites[site['species'][0]['element']] = []
                 sites[site['species'][0]['element']].append(site['xyz'])
             structures.append({
+                'material_id': cls._validate(r, 'material_id'),
                 'matrix': mat,
                 'sites': sites
             })
@@ -49,14 +50,14 @@ class ResponseParser:
     @classmethod
     def parse_mechanical_propaties(cls, res):
 
-        thermodynamic_properties = [{
+        mechanical_properties = [{
             'material_id': cls._validate(r, 'material_id'),
             'elasticity': cls._validate(r, 'elasticity'),
             'piezo': cls._validate(r, 'piezo'),
             'diel': cls._validate(r, 'diel'),
         } for r in res]
 
-        return thermodynamic_properties
+        return mechanical_properties
 
     @classmethod
     def parse_electrical_propaties(cls, res):
