@@ -5,8 +5,16 @@ from .base_crawler import BaseCrawler
 
 class BaseCrawlerRunner(metaclass=ABCMeta):
 
-    def __init__(self):
-        self._crawlers = []
+    def __init__(
+        self,
+        crawler: Union[BaseCrawler, List[BaseCrawler]]
+    ):
+        self._validate_crawler(crawler)
+
+        if not isinstance(crawler, list):
+            crawler = [crawler]
+
+        self._crawlers = crawler
 
     def add_crawler(
         self,

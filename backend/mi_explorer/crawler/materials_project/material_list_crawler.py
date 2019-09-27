@@ -1,7 +1,7 @@
 import pandas as pd
-from .base_crawler import BaseCrawler
-from ..data_source.materials_project.api_helper import VaspCalculated
-from ..utils.logger import Logger
+from ..base_crawler import BaseCrawler
+from ...data_source.materials_project.api_helper import VaspCalculated
+from ...utils.logger import Logger
 
 
 class MaterialListCrawler(BaseCrawler):

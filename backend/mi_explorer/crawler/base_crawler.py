@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Callable, Dict
+from typing import Callable, Dict, List
 import threading
 
 
@@ -31,11 +31,13 @@ class BaseCrawler(metaclass=ABCMeta):
     ):
         if on_finish_callback is not None:
             if not isinstance(on_finish_callback, list):
-                on_finish_callback += [on_finish_callback]
+                on_finish_callback = [on_finish_callback]
+            self._finish_callbacks += on_finish_callback
 
         if on_fail_callback is not None:
             if not isinstance(on_fail_callback, list):
-                on_fail_callback += [on_fail_callback]
+                on_fail_callback = [on_fail_callback]
+            self._fail_callbacks += on_fail_callback
 
         if async_:
             thread = threading.Thread(
