@@ -1,1 +1,1 @@
-from .material_list_crawler import MaterialListCrawler
+from .materials_project.material_list_crawler import MaterialListCrawler
