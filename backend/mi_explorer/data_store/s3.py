@@ -2,13 +2,14 @@ import pandas as pd
 import numpy as np
 import boto3
 from .base_datastore_helper import BaseDatastoreHelper
+from ..utils.config_reader import AWSConfig
 
 
 class S3Helper(BaseDatastoreHelper):
 
     def __init__(
         self,
-        bucket_name: str,
+        bucket_name: str=AWSConfig.S3_BUCKET_NAME,
     ):
         super(S3Helper, self).__init__()
         self._bucket_name = bucket_name
@@ -35,7 +36,7 @@ class S3Helper(BaseDatastoreHelper):
         self,
         base_dir: str,
     ) -> pd.DataFrame:
-        latest_file = get_latest_file(base_dir)
+        latest_file = self.get_latest_file(base_dir)
 
         df = pd.read_csv(latest_file)
 
@@ -51,6 +52,9 @@ class S3Helper(BaseDatastoreHelper):
             Bucket=bucket.name,
             Prefix=base_dir if base_dir[-1] == '/' else base_dir + '/'
         )
+
+        if 'Contents' not in objs:
+            raise RuntimeError(f'No file found in specified path : {base_dir}')
 
         files = {
             o.get('Key'): o.get('LastModified') for o in objs.get('Contents')
