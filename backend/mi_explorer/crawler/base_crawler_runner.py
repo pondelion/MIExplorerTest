@@ -6,6 +6,7 @@ from ..utils.exception import throws
 
 class BaseCrawlerRunner(metaclass=ABCMeta):
 
+    @throws(Exception)
     def __init__(
         self,
         crawler: Union[BaseCrawler, List[BaseCrawler]]

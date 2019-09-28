@@ -1,25 +1,36 @@
+import time
+import argparse
+import os
 import sys
 sys.path.append('..')
-import time
-from threading import Lock
 from mi_explorer.crawler import MaterialListCrawler
 from mi_explorer.data_store.s3 import S3Helper
 from mi_explorer.utils.logger import Logger
+from mi_explorer.utils.config_reader import AWSConfig
 
 
-def main():
+def main(args):
     mlc = MaterialListCrawler(max_id=4)
 
     def finish_callback(data):
         try:
             Logger.d('material_crawl', data)
-            s3_helper = S3Helper()
+            s3_helper = S3Helper(
+                bucket_name=AWSConfig.S3_BUCKET_NAME
+            )
             s3_helper.save(
                 df=data,
                 s3_path=s3_helper.to_s3path(
-                    f'materials_project/material_list/{time.strftime("%Y/%m/%d/%H/%M/%S/%Y%m%d_%H%M%S")}.csv'
+                    os.path.join(
+                        args.s3_savedir,
+                        f'{time.strftime("%Y/%m/%d/%H/%M/%S/%Y%m%d_%H%M%S")}.csv'
+                    )
                 )
             )
+            latest_file = s3_helper.get_latest_file(
+                base_dir=args.s3_savedir
+            )
+            Logger.d('material_crawl', f'Saved data to {latest_file}')
         except Exception as e:
             Logger.e('material_crawl', f'Failed to save crawled data to s3 : {e}')
 
@@ -36,4 +47,11 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--s3_savedir',
+        help='S3 directory to save crawled data.',
+        default='materials_project/material_list'
+    )
+    args = parser.parse_args()
+    main(args)
