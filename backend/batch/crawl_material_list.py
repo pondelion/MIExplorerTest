@@ -17,7 +17,7 @@ def main():
             s3_helper.save(
                 df=data,
                 s3_path=s3_helper.to_s3path(
-                    f'materials_project/material_list/{time.strftime("%Y%m%d_%H%M%S")}.csv'
+                    f'materials_project/material_list/{time.strftime("%Y/%m/%d/%H/%M/%S/%Y%m%d_%H%M%S")}.csv'
                 )
             )
         except Exception as e:

@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import List, Dict, Union
 from .base_crawler import BaseCrawler
+from ..utils.exception import throws
 
 
 class BaseCrawlerRunner(metaclass=ABCMeta):
@@ -16,6 +17,7 @@ class BaseCrawlerRunner(metaclass=ABCMeta):
 
         self._crawlers = crawler
 
+    @throws(Exception)
     def add_crawler(
         self,
         crawler: Union[BaseCrawler, List[BaseCrawler]]
