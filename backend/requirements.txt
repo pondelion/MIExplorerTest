@@ -6,7 +6,7 @@ Click==7.0
 docutils==0.15.2
 fastprogress==0.1.21
 Flask==1.1.1
-Flask-Cors==3.0.8
+Flask-Cors==3.0.9
 fsspec==0.5.1
 idna==2.8
 itsdangerous==1.1.0
